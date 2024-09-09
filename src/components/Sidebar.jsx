@@ -7,7 +7,7 @@ export default function Sidebar() {
 
   return (
     <>
-<ul className='w-full'>
+    <ul className='w-full '>
         <li
           className={`w-full transition-all duration-300 ${hoveredIndex === 0 ? 'bg-red-500 text-white' : ''}`}
           onMouseEnter={() => setHoveredIndex(0)}
