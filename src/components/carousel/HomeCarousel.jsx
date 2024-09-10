@@ -7,7 +7,7 @@ const HomeCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const timeoutRef = useRef(null);
   const transitionDuration = 1000;
-  const autoNextDuration = 7000;
+  const autoNextDuration = 5000;
 
   const movies = data ? data.slice(0, 8) : [];
 
