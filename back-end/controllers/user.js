@@ -1,5 +1,11 @@
-const registerUser = (req, res) => {
-  res.send("user registered successfully");
+const { connectToDatabase } = require("../db");
+
+const registerUser = async (req, res) => {
+  const db = await connectToDatabase();
+  const collection = db.collection("users");
+  const userData = req.body;
+  await collection.insertOne(userData);
+  res.send("User registered successfully");
 };
 
 module.exports = {
