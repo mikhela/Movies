@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import useFetch from '../useFetch';
 import './carouselstyle.css';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const HomeCarousel = () => {
-  const { data, isLoading, error } = useFetch('https://api.themoviedb.org/3/discover/movie?api_key=cd6592beb58e675d2cb6fdf038c87822');
+  const { data, loading, error } = useFetch('https://api.themoviedb.org/3/discover/movie?api_key=cd6592beb58e675d2cb6fdf038c87822');
   const [currentIndex, setCurrentIndex] = useState(0);
   const timeoutRef = useRef(null);
   const transitionDuration = 1000;
@@ -29,9 +30,8 @@ const HomeCarousel = () => {
     return () => clearTimeout(timeoutRef.current);
   }, [currentIndex, movies.length]);
 
-  if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-
+  if (loading) return   <ClipLoader color={"white"} loading={loading} size={50} aria-label="Loading Spinner" data-testid="loader" className='absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'/>
   return (
     <div className="carousel w-full h-[100vh] overflow-hidden relative">
       <div className="list" style={{ position: 'relative', height: '100%' }}>

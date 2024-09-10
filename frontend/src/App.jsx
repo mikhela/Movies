@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Movies from './pages/Movies'
 import Serials from './pages/Serials'
+
 export default function App() {
   return (
     <BrowserRouter>
