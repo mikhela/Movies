@@ -1,5 +1,5 @@
 const registerUser = (req, res) => {
-  res.send("registerUser");
+  res.send("user registered successfully");
 };
 
 module.exports = {
