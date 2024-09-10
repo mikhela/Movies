@@ -8,6 +8,14 @@ const registerUser = async (req, res) => {
   res.send("User registered successfully");
 };
 
+const getAllUsers = async (req, res) => {
+  const db = await connectToDatabase();
+  const collection = db.collection("users");
+  const users = await collection.find({}).toArray();
+  res.send(users);
+};
+
 module.exports = {
   registerUser: registerUser,
+  getAllUsers: getAllUsers,
 };

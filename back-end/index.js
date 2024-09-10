@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 
 app.use(bodyParser.json());
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 
 const port = 3000;
 const host = "localhost";
