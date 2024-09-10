@@ -1,8 +1,8 @@
-import "./movies.css"
-import useFetch from '../components/useFetch.jsx';
-import Cards from "./Cards.jsx";
+import "./genres.css"
+import useFetch from '../useFetch.jsx';
+import Cards from "../Cards.jsx";
 
-const HeaderMoviesByGenres = () => {
+const MoviesByGenres = () => {
   const genres = [
     { id: 10749, name: "Romance" },
     { id: 35, name: "Comedy" },
@@ -41,4 +41,4 @@ const HeaderMoviesByGenres = () => {
   );
 };
 
-export default HeaderMoviesByGenres;
+export default MoviesByGenres;
