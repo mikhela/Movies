@@ -16,3 +16,8 @@ body{
     width: 90%;
     margin: auto;
 }
+
+.blur
+{
+    backdrop-filter: blur(20px);
+}
