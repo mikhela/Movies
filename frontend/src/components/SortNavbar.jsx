@@ -4,7 +4,6 @@ import Dropdown from './Dropdown';
 export default function SortNavbar() {
   const [hover, setHover] = useState(false);
 
-  // Sample dropdown options
   const genres = ['Romance', 'Comedy', 'Action', 'Drama', 'Horror'];
   const years = ['2023', '2022', '2021', '2020', '2019'];
   const imdbRatings = ['0-3', '3-6', '6-9', '9-10'];
@@ -12,7 +11,6 @@ export default function SortNavbar() {
 
   return (
     <div className="w-full mt-4 lg:flex sm:gap-8">
-      {/* Grid by default, block layout on small screens and up */}
       <div className="grid grid-cols-2 gap-8 w-full lg:flex items-center md:gap-12">
         
         {/* Genre */}
@@ -29,7 +27,6 @@ export default function SortNavbar() {
         </div>
       </div>
 
-      {/* Full-width button below the grid */}
       <button
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
