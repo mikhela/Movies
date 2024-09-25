@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Movies from './pages/Movies';
 import Serials from './pages/Serials';
 import MovieContextProvider from './Context/MovieContext';
-
+import Movie from './pages/Movie'
 export default function App() {
   return (
     <BrowserRouter>
@@ -18,6 +18,7 @@ export default function App() {
             <Routes>
               <Route index element={<Home />} />
               <Route path='movies' element={<Movies />} />
+              <Route path='/movies/:id' element={<Movie />} />
               <Route path='/serials' element={<Serials />} />
             </Routes>
           </div>
