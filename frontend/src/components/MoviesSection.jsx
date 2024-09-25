@@ -7,7 +7,6 @@ export default function MoviesSection({ searchTerm }) {
 
   if (loading && movies.length === 0) return <h1>Loading...</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
-  console.log(movies);
   
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
