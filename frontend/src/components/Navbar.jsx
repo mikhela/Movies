@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 export default function Navbar() {
   return (
-    <div className='container flex justify-between items-center  h-[10vh] px-4 relative z-50'>
+    <div className='container flex justify-between items-center  h-[10vh]  relative z-50 '>
         
         <form className="w-[200px] lg:w-[300px]">
             <div className="flex">

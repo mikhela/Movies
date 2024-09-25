@@ -16,3 +16,21 @@ body{
     width: 90%;
     margin: auto;
 }
+
+.blur
+{
+    backdrop-filter: blur(20px);
+}
+
+.section::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .section {
+    scrollbar-width: none; 
+  }
+  
+  .section {
+    overflow-y: scroll; 
+    -ms-overflow-style: none; 
+  }
