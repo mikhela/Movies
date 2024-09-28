@@ -3,12 +3,10 @@ import Dropdown from './Dropdown';
 
 export default function SortNavbar() {
   const [hover, setHover] = useState(false);
-
   const genres = ['Romance', 'Comedy', 'Action', 'Drama', 'Horror'];
   const years = ['2023', '2022', '2021', '2020', '2019'];
   const imdbRatings = ['0-3', '3-6', '6-9', '9-10'];
-  const popularity = ['Most Popular', 'Least Popular'];
-
+  const popularity = ['Popular', ' Unpopular'];
   return (
     <div className="w-full mt-4 lg:flex sm:gap-8">
       <div className="grid grid-cols-2 gap-8 w-full lg:flex items-center md:gap-12">

@@ -11,7 +11,7 @@ export default function Movies() {
       <Navbar setSearchTerm={setSearchTerm} />
       <div className="container px-2">
         <SortNavbar />
-        <MoviesSection searchTerm={searchTerm} />
+        <MoviesSection searchTerm={searchTerm} /> 
       </div>
     </div>
   );
