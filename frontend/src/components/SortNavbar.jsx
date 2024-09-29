@@ -1,27 +1,46 @@
 import React, { useState } from 'react';
 import Dropdown from './Dropdown';
+import useDataFetch from './useDataFetch';
 
 export default function SortNavbar() {
+  // Movie genres 
+  const { data: movieGenres, loading: loadingGenres, error: errorGenres } = useDataFetch(
+    "https://api.themoviedb.org/3/genre/movie/list?api_key=cd6592beb58e675d2cb6fdf038c87822"
+  );
+
   const [hover, setHover] = useState(false);
-  const genres = ['Romance', 'Comedy', 'Action', 'Drama', 'Horror'];
-  const years = ['2023', '2022', '2021', '2020', '2019'];
+  
+  // Handling loading and error states
+  if (loadingGenres) return <h1>Loading genres...</h1>;
+  if (errorGenres) return <h1>Error fetching genres: {errorGenres.message}</h1>;
+
+  // Map movieGenres to an array of genre names
+  const genres = movieGenres ? movieGenres.genres.map(genre => genre.name) : [];
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 10 }, (_, index) => currentYear - index);
+  
   const imdbRatings = ['0-3', '3-6', '6-9', '9-10'];
-  const popularity = ['Popular', ' Unpopular'];
+  const popularity = ['Popular', 'Unpopular'];
+
   return (
     <div className="w-full mt-4 lg:flex sm:gap-8">
       <div className="grid grid-cols-2 gap-8 w-full lg:flex items-center md:gap-12">
         
-        {/* Genre */}
+        {/* Genre Dropdown */}
         <Dropdown label="Genre" items={genres} />
-        {/* Year */}
+        
+        {/* Year Dropdown */}
         <div className="flex justify-end lg:block">
-        <Dropdown label="Year" items={years} />
+          <Dropdown label="Year" items={years} />
         </div>
-        {/* IMDb */}
+        
+        {/* IMDb Rating Dropdown */}
         <Dropdown label="IMDb" items={imdbRatings} />
-        {/* Popularity */}
+        
+        {/* Popularity Dropdown */}
         <div className="flex justify-end lg:block">
-        <Dropdown label="Popularity" items={popularity} />
+          <Dropdown label="Popularity" items={popularity} />
         </div>
       </div>
 

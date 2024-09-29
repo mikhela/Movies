@@ -9,9 +9,9 @@ export default function Movies() {
   return (
     <div className='bg-black'>
       <Navbar setSearchTerm={setSearchTerm} />
-      <div className="container px-2">
+      <div className="container px-2 h-[90vh]  overflow-y-auto">
         <SortNavbar />
-        <MoviesSection searchTerm={searchTerm} /> 
+        <MoviesSection searchTerm={searchTerm} />
       </div>
     </div>
   );

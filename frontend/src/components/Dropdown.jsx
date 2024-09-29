@@ -21,7 +21,7 @@ export default function Dropdown({ label, items }) {
         <MenuHandler>
           <Button className="text-xl">{selectedItem || label}</Button>
         </MenuHandler>
-        <MenuList className="text-xl bg-black text-white border-[1px] px-1 py-2 w-[130px] sm:w-[200px] md:w-[250px] lg:w-[150px] mt-1 rounded-2xl">
+        <MenuList className="noscrollbar text-xl bg-black text-white border-[1px] px-1 py-2 w-[130px] sm:w-[200px] md:w-[250px] lg:w-[150px] max-h-[40vh] overflow-x-hidden overflow-y-auto mt-1 rounded-2xl ">
           {items.map((item, index) => (
             <MenuItem
               key={index}

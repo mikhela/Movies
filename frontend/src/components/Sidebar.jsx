@@ -42,7 +42,7 @@ export default function Sidebar() {
           <Link to="/serials">
           <div className="w-1/2 flex justify-center items-center flex-wrap mt-8 mx-auto">
               <FontAwesomeIcon icon={faCableCar} className={`transition-colors duration-300 text-sm md:text-2xl lg:text-3xl ${hoveredIndex === 2 ? 'text-black' : 'text-red-500'}`} />
-            <span className={`block transition-colors duration-300 cursor-pointer text-sm lg:text-lg ${hoveredIndex === 2 ? 'text-black' : 'text-white'}`}>Serials</span>
+            <span className={`block transition-colors duration-300 cursor-pointer text-sm lg:text-lg ${hoveredIndex === 2 ? 'text-black' : 'text-white'}`}>TV</span>
           </div>
           </Link>
 
