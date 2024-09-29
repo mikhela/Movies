@@ -68,7 +68,7 @@ export default function MoviesDetails() {
         </div>
         <div className="content_right">
           <h2 id="title">{movie.title}</h2>
-          <p id="overview">Overview: {movie.overview}</p>
+          <p id="overview" className='h-[200px] overflow-y-auto noscrollbar'>Overview: {movie.overview}</p>
           <div className="content_right_mininfo">
             <p id="date">Release date: {movie.release_date}</p>
             <p id="vote"><span id="imdb"> IMDb</span><span id="voteAv">{movie.vote_average}</span></p>
