@@ -8,15 +8,19 @@ export default function MoviesSection({ searchTerm }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState(null);
-
+  
   useEffect(() => {
-    if (searchTerm) {
-      // When there is a search term, fetch movies from the entire API
+    if (searchTerm && searchTerm.trim()) {
+      // When there is a valid search term, fetch movies from the entire API
       setSearchLoading(true);
       axios
         .get(`https://api.themoviedb.org/3/search/movie?api_key=cd6592beb58e675d2cb6fdf038c87822&query=${searchTerm}`)
         .then((response) => {
-          setFilteredMovies(response.data.results); // Set movies fetched from API
+          if (response.data && response.data.results) {
+            setFilteredMovies(response.data.results); // Set movies fetched from API
+          } else {
+            setFilteredMovies([]); // If no valid results, set to empty
+          }
           setSearchLoading(false);
         })
         .catch((error) => {
@@ -33,6 +37,11 @@ export default function MoviesSection({ searchTerm }) {
     fetchMoreMovies(); // Load more movies from the context
   };
 
+  // Validate each movie item before rendering it
+  const isValidMovie = (movie) => {
+    return movie && movie.id && movie.title && movie.poster_path;
+  };
+
   if (loading || searchLoading) return <h1>Loading movies...</h1>;
   if (error || searchError) return <h1>Error fetching movies: {(error || searchError).message}</h1>;
 
@@ -40,9 +49,11 @@ export default function MoviesSection({ searchTerm }) {
     <div className="noscrollbar w-100 h-[60vh] lg:h-[78vh] mt-4 overflow-y-auto">
       <div className="w-100 flex flex-wrap gap-8 justify-between">
         {filteredMovies.length ? (
-          filteredMovies.map((movie, index) => (
-            <MovieCard key={`${movie.id}-${index}`} movie={movie} />
-          ))
+          filteredMovies
+            .filter(isValidMovie) // Filter only valid movies
+            .map((movie, index) => (
+              <MovieCard key={`${movie.id}-${index}`} movie={movie} />
+            ))
         ) : (
           <p>No movies found for "{searchTerm}"</p>
         )}
