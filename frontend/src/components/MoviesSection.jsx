@@ -1,43 +1,32 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { MovieContext } from '../Context/MovieContext';
-import axios from 'axios';
+import useFetch from './useFetch';
 import MovieCard from './card/MovieCard';
 
 export default function MoviesSection({ searchTerm }) {
-  const { movies, loading, error, fetchMoreMovies } = useContext(MovieContext); // Default movie loading
+  const { movies, loading, error, fetchMoreMovies } = useContext(MovieContext); 
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [searchLoading, setSearchLoading] = useState(false);
-  const [searchError, setSearchError] = useState(null);
-  
+
+  const { data: searchResults, loading: searchLoading, error: searchError } = useFetch(
+    searchTerm && searchTerm.trim()
+      ? `https://api.themoviedb.org/3/search/movie?api_key=cd6592beb58e675d2cb6fdf038c87822&query=${searchTerm}`
+      : null
+  );
+
   useEffect(() => {
     if (searchTerm && searchTerm.trim()) {
-      // When there is a valid search term, fetch movies from the entire API
-      setSearchLoading(true);
-      axios
-        .get(`https://api.themoviedb.org/3/search/movie?api_key=cd6592beb58e675d2cb6fdf038c87822&query=${searchTerm}`)
-        .then((response) => {
-          if (response.data && response.data.results) {
-            setFilteredMovies(response.data.results); // Set movies fetched from API
-          } else {
-            setFilteredMovies([]); // If no valid results, set to empty
-          }
-          setSearchLoading(false);
-        })
-        .catch((error) => {
-          setSearchError(error);
-          setSearchLoading(false);
-        });
+      if (searchResults) {
+        setFilteredMovies(searchResults);
+      }
     } else {
-      // If no search term, use the movies from context (default)
       setFilteredMovies(movies);
     }
-  }, [searchTerm, movies]);
+  }, [searchResults, movies, searchTerm]); 
 
   const handleLoadMore = () => {
-    fetchMoreMovies(); // Load more movies from the context
+    fetchMoreMovies(); 
   };
 
-  // Validate each movie item before rendering it
   const isValidMovie = (movie) => {
     return movie && movie.id && movie.title && movie.poster_path;
   };
@@ -47,10 +36,10 @@ export default function MoviesSection({ searchTerm }) {
 
   return (
     <div className="noscrollbar w-100 h-[60vh] lg:h-[78vh] mt-4 overflow-y-auto">
-      <div className="w-100 flex flex-wrap gap-8 justify-between">
+      <div className="w-100 flex flex-wrap gap-8  justify-center">
         {filteredMovies.length ? (
           filteredMovies
-            .filter(isValidMovie) // Filter only valid movies
+            .filter(isValidMovie)
             .map((movie, index) => (
               <MovieCard key={`${movie.id}-${index}`} movie={movie} />
             ))
@@ -58,7 +47,7 @@ export default function MoviesSection({ searchTerm }) {
           <p>No movies found for "{searchTerm}"</p>
         )}
       </div>
-      {!searchTerm && ( // Show "Load More" only when no search is performed
+      {!searchTerm && ( 
         <div
           className="load-more text-xl text-orange-600 border-[1px] border-orange-600 bg-black rounded-xl w-40 text-center py-1 mt-12 cursor-pointer hover:bg-orange-600 hover:text-black transition-all duration-200"
           onClick={handleLoadMore}
