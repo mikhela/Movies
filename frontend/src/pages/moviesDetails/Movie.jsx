@@ -1,25 +1,41 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MovieContext } from '../../Context/MovieContext';
 import useFetch from '../../components/useFetch';
+import axios from 'axios';
 import './detailsStyle.css';
 
 export default function MoviesDetails() {
   const { id } = useParams();
   const { movies, loading, error } = useContext(MovieContext);
+  const [movie, setMovie] = useState(null);
 
   // Fetching trailer using useFetch
   const { data: trailerData, loading: loadingTrailer, error: trailerError } = useFetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=cd6592beb58e675d2cb6fdf038c87822`);
 
-  if (loading) return <h1>Loading...</h1>;
+  // Check if the movie exists in the context, otherwise fetch the movie by ID from API
+  useEffect(() => {
+    const foundMovie = movies.find((m) => m.id === parseInt(id));
+
+    if (foundMovie) {
+      setMovie(foundMovie);
+    } else {
+      // Fetch movie by ID from the API
+      axios
+        .get(`https://api.themoviedb.org/3/movie/${id}?api_key=cd6592beb58e675d2cb6fdf038c87822`)
+        .then((response) => {
+          setMovie(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching movie:', error);
+        });
+    }
+  }, [id, movies]);
+
+  if (loading || !movie) return <h1>Loading movie details...</h1>;
   if (error) return <h1>{error.message}</h1>;
 
-  const movie = movies.find((movie) => movie.id === parseInt(id));
-
-  if (!movie) return <h1>Movie not found</h1>;
-
-  // Find the trailer video from the fetched trailerData
-  const trailer = trailerData.find(video => video.type === 'Trailer');
+  const trailer = trailerData?.find((video) => video.type === 'Trailer');
 
   return (
     <div className="MoviesDetails">
@@ -28,9 +44,8 @@ export default function MoviesDetails() {
         style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})` }}>
       </div>
       <div className="information__Container">
-        <div 
-          className="content_left" >
-              {loadingTrailer ? (
+        <div className="content_left">
+          {loadingTrailer ? (
             <p>Loading trailer...</p>
           ) : trailerError ? (
             <p>{trailerError.message}</p>
@@ -53,14 +68,12 @@ export default function MoviesDetails() {
         </div>
         <div className="content_right">
           <h2 id="title">{movie.title}</h2>
-          <p id="overview">Overview: {movie.overview}</p>
+          <p id="overview" className='h-[200px] overflow-y-auto noscrollbar'>Overview: {movie.overview}</p>
           <div className="content_right_mininfo">
             <p id="date">Release date: {movie.release_date}</p>
             <p id="vote"><span id="imdb"> IMDb</span><span id="voteAv">{movie.vote_average}</span></p>
             <p id="popularity">Popularity: {movie.popularity}</p>
           </div>
-          {/* Display trailer if it exists */}
-        
         </div>
       </div>
     </div>

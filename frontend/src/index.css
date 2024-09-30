@@ -22,15 +22,15 @@ body{
     backdrop-filter: blur(20px);
 }
 
-.section::-webkit-scrollbar {
+.noscrollbar::-webkit-scrollbar {
     display: none;
   }
   
-  .section {
+  .noscrollbar {
     scrollbar-width: none; 
   }
   
-  .section {
+  .sectionnoscrollbar {
     overflow-y: scroll; 
     -ms-overflow-style: none; 
   }
