@@ -4,7 +4,7 @@ import { TvShowContext } from '../../Context/TvShowContext';
 import axios from 'axios';
 import './detailsStyle.css';
 
-export default function TvShowDetails() {
+export default function TvShow() {
   const { id } = useParams();
   const { loading, error } = useContext(TvShowContext);
   const [tvShow, setTvShow] = useState(null);
@@ -32,7 +32,7 @@ export default function TvShowDetails() {
         <div 
           className="movieBanner" 
           style={{ 
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${tvShow.backdrop_path})` 
+            backgroundImage: `${tvShow.backdrop_path ? `url(https://image.tmdb.org/t/p/original/${tvShow.backdrop_path})` : `url(https://image.tmdb.org/t/p/w500/${tvShow.poster_path})`}` 
           }}
         >
         </div>
