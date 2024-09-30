@@ -7,13 +7,11 @@ import './detailsStyle.css';
 
 export default function Movie() {
   const { id } = useParams();
-  const { movies, loading, error } = useContext(MovieContext);
+  const { loading, error } = useContext(MovieContext);
   const [movie, setMovie] = useState(null);
 
-  // Fetching trailer using useFetch
   const { data: trailerData, loading: loadingTrailer, error: trailerError } = useFetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=cd6592beb58e675d2cb6fdf038c87822`);
 
-  // Check if the movie exists in the context, otherwise fetch the movie by ID from API
   useEffect(() => {
     const fetchMovie = async () => {
       try {

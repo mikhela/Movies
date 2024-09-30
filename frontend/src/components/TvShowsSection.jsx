@@ -6,22 +6,24 @@ import TvShowCard from './card/TvShowCard';
 export default function TvShowsSection({ searchTerm }) {
   const { tvShows, loading, error, fetchMoreTvShows } = useContext(TvShowContext); 
   const [filteredTvShows, setFilteredTvShows] = useState([]);
-
+  
   const { data: searchResults, loading: searchLoading, error: searchError } = useFetch(
     searchTerm && searchTerm.trim()
       ? `https://api.themoviedb.org/3/search/tv?api_key=cd6592beb58e675d2cb6fdf038c87822&query=${searchTerm}`
       : null
-  );
-
+  );  
+  console.log(filteredTvShows);
+  
   useEffect(() => {
     if (searchTerm && searchTerm.trim()) {
       if (searchResults) {
-        setFilteredTvShows(searchResults.results); 
-      }
+        setFilteredTvShows(searchResults);
+      } 
     } else {
-      setFilteredTvShows(tvShows);
+      setFilteredTvShows(tvShows); 
     }
-  }, [searchResults, tvShows, searchTerm]); 
+  
+  }, [searchResults, tvShows, searchTerm]);
 
   const handleLoadMore = () => {
     fetchMoreTvShows(); 
@@ -31,20 +33,20 @@ export default function TvShowsSection({ searchTerm }) {
     return show && show.id && show.name && show.poster_path;
   };
 
-  if (loading || searchLoading) return <h1>Loading TV shows...</h1>;
-  if (error || searchError) return <h1>Error fetching TV shows: {(error || searchError).message}</h1>;
+  if (loading || searchLoading) return <h1 className='text-white'>Loading TV shows...</h1>;
+  if (error || searchError) return <h1 className='text-white'>Error fetching TV shows: {(error || searchError).message}</h1>;
 
   return (
     <div className="noscrollbar w-100 h-[60vh] lg:h-[78vh] mt-4 overflow-y-auto">
       <div className="w-100 flex flex-wrap gap-8 justify-center">
-        {filteredTvShows.length ? (
+        {filteredTvShows? (
           filteredTvShows
             .filter(isValidTvShow)
             .map((show, index) => (
               <TvShowCard key={`${show.id}-${index}`} show={show} /> 
             ))
         ) : (
-          <p>No TV shows found for "{searchTerm}"</p>
+          <p className='text-white'>No TV shows found for "{searchTerm}"</p>
         )}
       </div>
       {!searchTerm && ( 

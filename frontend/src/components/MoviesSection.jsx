@@ -12,7 +12,8 @@ export default function MoviesSection({ searchTerm }) {
       ? `https://api.themoviedb.org/3/search/movie?api_key=cd6592beb58e675d2cb6fdf038c87822&query=${searchTerm}`
       : null
   );
-
+  console.log(searchResults);
+  
   useEffect(() => {
     if (searchTerm && searchTerm.trim()) {
       if (searchResults) {
