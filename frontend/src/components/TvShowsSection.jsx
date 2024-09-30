@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TvShowContext } from '../Context/TvShowContext'; // Import the correct context
 import useFetch from './useFetch';
-import MovieCard from './card/MovieCard';
+import TvShowCard from './card/TvShowCard'; // Import the new TvShowCard component
 
 export default function TvShowsSection({ searchTerm }) {
   const { tvShows, loading, error, fetchMoreTvShows } = useContext(TvShowContext); // Use TV show context
@@ -17,7 +17,7 @@ export default function TvShowsSection({ searchTerm }) {
   useEffect(() => {
     if (searchTerm && searchTerm.trim()) {
       if (searchResults) {
-        setFilteredTvShows(searchResults);
+        setFilteredTvShows(searchResults.results); // Ensure you're using the correct structure
       }
     } else {
       setFilteredTvShows(tvShows);
@@ -37,12 +37,12 @@ export default function TvShowsSection({ searchTerm }) {
 
   return (
     <div className="noscrollbar w-100 h-[60vh] lg:h-[78vh] mt-4 overflow-y-auto">
-      <div className="w-100 flex flex-wrap gap-8  justify-center">
+      <div className="w-100 flex flex-wrap gap-8 justify-center">
         {filteredTvShows.length ? (
           filteredTvShows
             .filter(isValidTvShow)
             .map((show, index) => (
-              <MovieCard key={`${show.id}-${index}`} movie={show} />
+              <TvShowCard key={`${show.id}-${index}`} show={show} /> // Use TvShowCard instead of MovieCard
             ))
         ) : (
           <p>No TV shows found for "{searchTerm}"</p>

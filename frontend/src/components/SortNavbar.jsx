@@ -10,7 +10,6 @@ export default function SortNavbar() {
 
   const [hover, setHover] = useState(false);
   
-  // Handling loading and error states
   if (loadingGenres) return <h1>Loading genres...</h1>;
   if (errorGenres) return <h1>Error fetching genres: {errorGenres.message}</h1>;
 
@@ -19,7 +18,7 @@ export default function SortNavbar() {
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 10 }, (_, index) => currentYear - index);
-  
+  const average = 0;
   const imdbRatings = ['0-3', '3-6', '6-9', '9-10'];
   const popularity = ['Popular', 'Unpopular'];
 

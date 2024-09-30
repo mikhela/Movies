@@ -5,7 +5,7 @@ import useFetch from '../../components/useFetch';
 import axios from 'axios';
 import './detailsStyle.css';
 
-export default function MoviesDetails() {
+export default function Movie() {
   const { id } = useParams();
   const { movies, loading, error } = useContext(MovieContext);
   const [movie, setMovie] = useState(null);
@@ -15,22 +15,21 @@ export default function MoviesDetails() {
 
   // Check if the movie exists in the context, otherwise fetch the movie by ID from API
   useEffect(() => {
-    const foundMovie = movies.find((m) => m.id === parseInt(id));
-
-    if (foundMovie) {
-      setMovie(foundMovie);
-    } else {
-      // Fetch movie by ID from the API
-      axios
-        .get(`https://api.themoviedb.org/3/movie/${id}?api_key=cd6592beb58e675d2cb6fdf038c87822`)
-        .then((response) => {
-          setMovie(response.data);
-        })
-        .catch((error) => {
+    const fetchMovie = async () => {
+      try {
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=cd6592beb58e675d2cb6fdf038c87822`);
+        setMovie(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          console.error('Movie not found (404). URL:', `https://api.themoviedb.org/3/movie/${id}`);
+        } else {
           console.error('Error fetching movie:', error);
-        });
-    }
-  }, [id, movies]);
+        }
+      }
+    };
+  
+    fetchMovie();
+  }, [id]);
 
   if (loading || !movie) return <h1>Loading movie details...</h1>;
   if (error) return <h1>{error.message}</h1>;
