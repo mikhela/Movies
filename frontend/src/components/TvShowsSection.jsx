@@ -1,11 +1,10 @@
-// TvShowsSection.js
 import React, { useContext, useEffect, useState } from 'react';
-import { TvShowContext } from '../Context/TvShowContext'; // Import the correct context
+import { TvShowContext } from '../Context/TvShowContext'; 
 import useFetch from './useFetch';
-import TvShowCard from './card/TvShowCard'; // Import the new TvShowCard component
+import TvShowCard from './card/TvShowCard'; 
 
 export default function TvShowsSection({ searchTerm }) {
-  const { tvShows, loading, error, fetchMoreTvShows } = useContext(TvShowContext); // Use TV show context
+  const { tvShows, loading, error, fetchMoreTvShows } = useContext(TvShowContext); 
   const [filteredTvShows, setFilteredTvShows] = useState([]);
 
   const { data: searchResults, loading: searchLoading, error: searchError } = useFetch(
@@ -17,7 +16,7 @@ export default function TvShowsSection({ searchTerm }) {
   useEffect(() => {
     if (searchTerm && searchTerm.trim()) {
       if (searchResults) {
-        setFilteredTvShows(searchResults.results); // Ensure you're using the correct structure
+        setFilteredTvShows(searchResults.results); 
       }
     } else {
       setFilteredTvShows(tvShows);
@@ -42,7 +41,7 @@ export default function TvShowsSection({ searchTerm }) {
           filteredTvShows
             .filter(isValidTvShow)
             .map((show, index) => (
-              <TvShowCard key={`${show.id}-${index}`} show={show} /> // Use TvShowCard instead of MovieCard
+              <TvShowCard key={`${show.id}-${index}`} show={show} /> 
             ))
         ) : (
           <p>No TV shows found for "{searchTerm}"</p>
