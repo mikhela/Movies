@@ -16,7 +16,7 @@ export default function TvShowsSection({ searchTerm }) {
   useEffect(() => {
     if (searchTerm && searchTerm.trim()) {
       if (searchResults) {
-        setFilteredTvShows(searchResults.results); 
+        setFilteredTvShows(searchResults); 
       }
     } else {
       setFilteredTvShows(tvShows);
