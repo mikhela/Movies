@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { TvShowContext } from '../Context/TvShowContext'; 
 import useFetch from './useFetch';
 import TvShowCard from './card/TvShowCard'; 
-
 export default function TvShowsSection({ searchTerm }) {
   const { tvShows, loading, error, fetchMoreTvShows } = useContext(TvShowContext); 
   const [filteredTvShows, setFilteredTvShows] = useState([]);
@@ -35,8 +34,8 @@ export default function TvShowsSection({ searchTerm }) {
   if (error || searchError) return <h1>Error fetching TV shows: {(error || searchError).message}</h1>;
 
   return (
-    <div className="noscrollbar w-100 h-[60vh] lg:h-[78vh] mt-4 overflow-y-auto">
-      <div className="w-100 flex flex-wrap gap-8 justify-center">
+    <div className="noscrollbar w-100 h-[80vh] lg:h-[85vh]  overflow-y-auto ">
+  <div className="w-100 flex flex-wrap gap-8  justify-center mt-4">
         {filteredTvShows.length ? (
           filteredTvShows
             .filter(isValidTvShow)
@@ -49,7 +48,7 @@ export default function TvShowsSection({ searchTerm }) {
       </div>
       {!searchTerm && ( 
         <div
-          className="load-more text-xl text-orange-600 border-[1px] border-orange-600 bg-black rounded-xl w-40 text-center py-1 mt-12 cursor-pointer hover:bg-orange-600 hover:text-black transition-all duration-200"
+          className="load-more text-xl mx-auto md:mx-0 text-orange-600 border-[1px] border-orange-600 bg-black rounded-xl w-40 text-center py-1 mt-12 cursor-pointer hover:bg-orange-600 hover:text-black transition-all duration-200"
           onClick={handleLoadMore}
         >
           Load more
