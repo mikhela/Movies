@@ -8,16 +8,20 @@ export default function Navbar({ setSearchTerm }) {
     setSearchTerm(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+  };
+
   return (
-    <div className='container flex justify-between items-center  h-[10vh]  relative z-50'>
-      <form className="w-[200px] lg:w-[300px]">
+    <div className='container flex justify-between items-center h-[10vh] relative z-50'>
+      <form className="w-[200px] lg:w-[300px]" onSubmit={handleSubmit}>
         <div className="flex">
           <div className="relative w-full">
             <input
               type="search"
               id="location-search"
               className="block p-2.5 w-full z-20 text-xs lg:text-sm rounded-3xl text-white bg-sidebarbg focus:text-white"
-              placeholder="Search for movies"
+              placeholder="Search" // Changed placeholder
               onChange={handleInputChange}
             />
             <button

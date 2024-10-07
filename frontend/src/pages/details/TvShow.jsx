@@ -9,7 +9,6 @@ export default function TvShow() {
   const { loading, error } = useContext(TvShowContext);
   const [tvShow, setTvShow] = useState(null);
 
-  // Fetching TV show details
   useEffect(() => {
     const fetchTvShow = async () => {
       try {
