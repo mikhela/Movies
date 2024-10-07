@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import SortNavbar from '../components/SortNavbar';
-import TvShowsSection from '../components/TvShowsSection';
+import TvShowsSection from '../components/TvShowsSection'
+export default function TvShows() {
+  const [searchTerm, setSearchTerm] = useState('');
 
-export default function TvShows({ searchTerm, setSearchTerm }) {
   return (
     <div className='bg-black'>
       <Navbar setSearchTerm={setSearchTerm} />
-      <div className="container px-2 h-[90vh] overflow-y-auto">
-        <SortNavbar />
+      <div className="container px-2 h-[90vh]  overflow-y-auto">
         <TvShowsSection searchTerm={searchTerm} />
       </div>
     </div>
-  );
+  )
 }
