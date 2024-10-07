@@ -6,9 +6,10 @@ import Movies from './pages/Movies';
 import TvShows from './pages/TvShows';
 import MovieContextProvider from './Context/MovieContext';
 import TvShowContextProvider from './Context/TvShowContext';
-import Movie from './pages/details/Movie';  // Movie details component
-import TvShow from './pages/details/TvShow';  // TV show details component
-
+import Movie from './pages/details/Movie';  
+import TvShow from './pages/details/TvShow';  
+import Signup from './pages/signup/Signup';
+import Login from './pages/Login'
 export default function App() {
   return (
     <BrowserRouter>
@@ -22,9 +23,11 @@ export default function App() {
               <Routes>
                 <Route index element={<Home />} />
                 <Route path='movies' element={<Movies />} />
-                <Route path='/movies/:id' element={<Movie />} /> {/* Movie details route */}
+                <Route path='/movies/:id' element={<Movie />} /> 
                 <Route path='/tvshows' element={<TvShows />} />
-                <Route path='/tvshows/:id' element={<TvShow />} /> {/* TV show details route */}
+                <Route path='/tvshows/:id' element={<TvShow />} /> 
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/login' element={<Login />} />
               </Routes>
             </div>
           </div>
