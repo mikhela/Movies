@@ -1,7 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
 export default function Navbar({ setSearchTerm }) {
   const handleInputChange = (e) => {
@@ -31,14 +28,7 @@ export default function Navbar({ setSearchTerm }) {
           </div>
         </div>
       </form>
-      <div className="authorization">
-        <Link to="/signup">
-        <FontAwesomeIcon
-          icon={faUser}
-          className='text-white cursor-pointer text-2xl lg:text-lg md:border-2 md:border-white p-2 rounded-full'
-        />
-        </Link>
-      </div>
+    
     </div>
   );
 }

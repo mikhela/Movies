@@ -8,8 +8,7 @@ import MovieContextProvider from './Context/MovieContext';
 import TvShowContextProvider from './Context/TvShowContext';
 import Movie from './pages/details/Movie';  
 import TvShow from './pages/details/TvShow';  
-import Signup from './pages/signup/Signup';
-import Login from './pages/Login'
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -26,8 +25,6 @@ export default function App() {
                 <Route path='/movies/:id' element={<Movie />} /> 
                 <Route path='/tvshows' element={<TvShows />} />
                 <Route path='/tvshows/:id' element={<TvShow />} /> 
-                <Route path='/signup' element={<Signup />} />
-                <Route path='/login' element={<Login />} />
               </Routes>
             </div>
           </div>
